@@ -1,0 +1,30 @@
+<h1>Appointment</h1>
+
+<p>Date: <%= formatted_datetime(@appointment.date) %>
+<p>Reason: <%= @appointment.reason %></p>
+<p>Status: <%= appointment_status_text(@appointment.status) %>
+
+<p>
+  Pet:
+  <%= link_to @appointment.pet.name, pet_path(@appointment.pet) %>
+</p>
+
+<p>
+  Vet:
+  <%= link_to "#{@appointment.vet.first_name} #{@appointment.vet.last_name}", vet_path(@appointment.vet) %>
+</p>
+
+<h2>Treatments</h2>
+
+<ul>
+  <% @appointment.treatments.each do |treatment| %>
+    <li>
+      <strong><%= treatment.name %></strong> -
+      <%= treatment.medication %> -
+      <%= treatment.dosage %> -
+      <%= formatted_datetime(treatment.administered_at) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Back", appointments_path %>
